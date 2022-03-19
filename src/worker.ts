@@ -25,11 +25,11 @@ const sendRequest = async (target: string, timeout: number) => {
     await fetch(target, {
       mode: "no-cors",
       cache: "no-store",
-      referrerPolicy: "same-origin",
+      referrerPolicy: "no-referrer",
       signal: controller.signal,
-      headers: {
+      headers: new Headers({
         "User-Agent": generateUserAgent(),
-      },
+      }),
     });
 
     clearTimeout(timeoutId);
