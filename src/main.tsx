@@ -75,7 +75,7 @@ export const Main = () => {
               required
               fullWidth
               id="target"
-              label="Target URL"
+              label="Target URLs (separated with ',')"
               name="target"
               autoFocus
               disabled={active}

