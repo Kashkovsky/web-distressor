@@ -1,4 +1,3 @@
-import { lift } from "@grammarly/focal";
 import {
   Box,
   Button,
@@ -10,6 +9,8 @@ import {
   ThemeProvider,
   Typography,
   Divider,
+  Card,
+  CardContent,
 } from "@mui/material";
 import * as React from "react";
 import {
@@ -20,6 +21,7 @@ import {
   scan,
   tap,
 } from "rxjs";
+import { fetchAttack } from "./fetch";
 
 const theme = createTheme();
 
@@ -101,9 +103,46 @@ export const Main = () => {
             </Button>
           </Box>
           <Divider />
-          <Box component="div">
+          <Box component="div" mt={2}>
             <Alert severity="success">{`Requests sent: ${n}`}</Alert>
           </Box>
+        </Box>
+        <Box mt={2}>
+          <Card variant="outlined">
+            <CardContent>
+              <Typography
+                sx={{ fontSize: 16 }}
+                color="text.secondary"
+                gutterBottom
+              >
+                Fetch Attack
+              </Typography>
+              <Typography variant="body2" component="div">
+                Use this method to bypass cross-domain request blocking:
+              </Typography>
+              <Typography variant="body2" component="div">
+                1. Drag this link to the Bookmarks tab of your browser
+              </Typography>
+              <Typography variant="body2" component="div">
+                ---{">"}{" "}
+                <a
+                  href="#"
+                  onMouseOver={(
+                    e: React.MouseEvent<HTMLAnchorElement, MouseEvent>
+                  ) => (e.currentTarget.href = `javascript:${fetchAttack}`)}
+                >
+                  FETCH ATTACK
+                </a>{" "}
+                {"<"}---
+              </Typography>
+              <Typography variant="body2" component="div">
+                2. Open a target site in a new tab
+              </Typography>
+              <Typography variant="body2" component="div">
+                3. Click the link and adjust the number of threads
+              </Typography>
+            </CardContent>
+          </Card>
         </Box>
       </Container>
     </ThemeProvider>

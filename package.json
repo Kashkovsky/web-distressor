@@ -5,7 +5,7 @@
   "source": "./src/index.html",
   "scripts": {
     "dev": "parcel ./src/index.html",
-    "build": "yarn clean:build && parcel build && yarn cp:target",
+    "build": "yarn clean:build && parcel build ./src/index.html && yarn cp:target",
     "clean:build": "rm -rf ./dist",
     "cp:target": "cp ./targets/target.json ./dist/target.json",
     "deploy": "surge ./dist glory2ukraine.surge.sh",
