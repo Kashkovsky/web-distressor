@@ -33,4 +33,4 @@ export const fetchAttack = `(function(){
         }
     };
     attack.init();
-})()`;
+})()`

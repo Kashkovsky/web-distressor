@@ -56,8 +56,7 @@ export const Main = () => {
       .subscribe();
   };
 
-  return (
-    <ThemeProvider theme={theme}>
+   return (<ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box
